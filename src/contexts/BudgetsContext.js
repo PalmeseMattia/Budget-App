@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState} from 'react'
 import { v4 as uuidV4 } from 'uuid'
+import useLocalStorage from '../hooks/useLocalStorage'
 const BudgetContext = createContext()
 
 export function UseBudgets(){
@@ -7,8 +8,8 @@ export function UseBudgets(){
 }
 
 export const BudgetProvider = ({ children }) => {
-    const [budgets, setBudget] = useState([])
-    const [expenses, setExpenses] = useState([])
+    const [budgets, setBudget] = useLocalStorage([])
+    const [expenses, setExpenses] = useLocalStorage([])
     
     function getBudgetExpenses(budgetId){
         return expenses.filter(expense => expense.budgetId === budgetId)
